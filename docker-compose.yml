@@ -1,0 +1,23 @@
+version: ${DOCKER_COMPOSE_VERSION}
+
+services:
+
+  frontend:
+    container_name: frontend
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true 
+
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        FRONTEND_PORT: ${FRONTEND_PORT}
+        NODE_VERSION: ${NODE_VERSION}
+    env_file:
+      - .env
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules

@@ -1,10 +1,10 @@
-import { useState } from "react";
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import '/src/pages/styles/Menu.sass';
 
-function Menu () {
+import MenuIcon from '@/images/MenuIcon.svg';
+
+function Menu() {
   const [menuOpened, setMenuOpened] = useState(false);
 
   const toggleMenu = () => {
@@ -14,9 +14,13 @@ function Menu () {
   return (
     <header>
       {menuOpened ? (
-        <CloseIcon className="menu-icon" onClick={toggleMenu}/>
+        <div className="menu-icon" onClick={toggleMenu}>
+          <img src={MenuIcon} alt="Menu Icon" />
+        </div>
       ) : (
-        <MenuIcon className="menu-icon" onClick={toggleMenu}/>
+        <div className="menu-icon" onClick={toggleMenu}>
+          <img src={MenuIcon} alt="Menu Icon" />
+        </div>
       )}
       <nav className={menuOpened ? "menu show" : "menu"}>
         <ul>

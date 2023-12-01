@@ -1,3 +1,5 @@
+import { fileURLToPath, URL } from 'node:url'
+
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 
@@ -10,6 +12,13 @@ export default defineConfig({
     strictPort: true,
     watch: {
       usePolling: true
+    }
+  },
+
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '/@': fileURLToPath(new URL('/src/pages/styles', import.meta.url))
     }
   }
 })

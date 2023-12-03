@@ -1,7 +1,7 @@
 import React from "react";
-import '/@/Article.sass';
+import '/$styles/Article.sass';
 
-function Article() {
+function FirstArticle() {
     return (
         <div className="article">
             <div className="article__frame">
@@ -15,4 +15,4 @@ function Article() {
     );
 }
 
-export default Article;
+export default FirstArticle;

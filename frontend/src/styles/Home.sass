@@ -1,3 +1,5 @@
+@use '/$styles/breakpoints'
+
 @import 'variables'
 
 body
@@ -96,3 +98,28 @@ body
   line-height: 20px
   padding: 0
   background: $yellow-color
+
+.image_button-link
+  color: black
+
+
+@include breakpoints.mobile
+  .image-container
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    border-radius: 5px
+    margin-top: -25%
+    margin-bottom: 50px
+
+  .image
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    width: 300px
+    height: 300px
+    background-size: 300px 300px
+    border-radius: 5px
+    margin-right: 10px
+    margin-bottom: 30px

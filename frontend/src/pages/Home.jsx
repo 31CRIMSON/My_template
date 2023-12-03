@@ -1,5 +1,6 @@
 import React from 'react';
-import '/@/Home.sass';
+import { Link } from 'react-router-dom';
+import '/$styles/Home.sass';
 
 function Home() {
   return (
@@ -16,21 +17,27 @@ function Home() {
         <div className='image image_1'>
           <div className='image__desc'>
             <div className='image__text'>Dima is great</div>
-            <button className='image__button'>Read Article</button>
+            <button className='image__button'>
+            <Link to="/article-1" className="image_button-link">Read Article</Link>
+            </button>
           </div>
         </div>
 
         <div className='image image_2'>
           <div className='image__desc'>
             <div className='image__text'>Dima is awesome</div>
-            <button className='image__button'>Read Article</button>
+            <button className='image__button'>
+            <Link to="/article-2" className="image_button-link">Read Article</Link>
+            </button>
           </div>
         </div>
 
         <div className='image image_3'>
           <div className='image__desc'>
             <div className='image__text'>Dima is good</div>
-            <button className='image__button'>Read Article</button>
+            <button className='image__button'>
+            <Link to="/article-3" className="image_button-link">Read Article</Link>
+            </button>
           </div>
         </div>
       </div>

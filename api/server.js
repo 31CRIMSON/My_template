@@ -17,11 +17,11 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to bezkoder application." });
 });
 
-let mysql      = require('mysql');
+let mysql      = require('mysql2');
 let connection = mysql.createConnection({
-  host     : 'mysql',
-  user     : 'root',
-  password : 'root',
+  host     : 'host.docker.internal',
+  user     : 'user',
+  password : 'password',
   database : 'database'
 });
  
@@ -32,12 +32,9 @@ connection.connect(function(err) {
   }
 
   console.log('Connected as id ' + connection.threadId);
-});;
- 
+});
  
 connection.end();
-
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

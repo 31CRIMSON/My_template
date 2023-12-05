@@ -1,15 +1,39 @@
 import React from "react";
 import '/$styles/Article.sass';
+import { useState, useEffect } from 'react';
+import axios  from "axios";
+import { useParams } from "react-router-dom";
 
 function FirstArticle() {
+    const { page_id } = useParams(); 
+    const [data, setData] = useState({
+      title: "",
+      decription: "",
+      path: "",
+    });
+  
+    useEffect(() => {
+      axios
+        .get(`http://localhost:3000/data/${page_id}`) 
+        .then((response) => {
+          console.log(response.data);
+          setData(response.data.data);
+        })
+        .catch((error) => {
+          console.error("Error getting data: " + error);
+        });
+    }, [page_id]);
+    
+    
+
     return (
         <div className="article">
             <div className="article__frame">
-                <div className="article__frame-heading">Why Dima is great</div>
-                <div className="article__frame-paragraph">As Dima, I believe my greatest strength lies in my relentless pursuit of knowledge and my ability to adapt to new technologies. My passion for programming goes beyond just writing code; it's about solving complex problems and making a tangible impact. I thrive on challenges and constantly seek to improve my skills. My dedication to my craft has led me to master various programming languages and technologies, enabling me to contribute significantly to every project I undertake. My commitment to excellence and my ability to work effectively both independently and as part of a team make me a valuable asset in the tech industry. My journey in programming is not just a career; it's a continuous adventure in learning and growth.</div>
+                <div className="article__frame-heading">{data.title}</div>
+                <div className="article__frame-paragraph">{data.decription}</div>
             </div>
             <div className="article__image-container">
-                <div className="article__image"></div>
+                <img src={data.path} className="article__image"></img>
             </div>
         </div>
     );

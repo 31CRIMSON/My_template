@@ -9,22 +9,20 @@ let corsOptions = {
 
 app.use(cors(corsOptions));
 
+
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
-});
-
 let mysql      = require('mysql2');
 let connection = mysql.createConnection({
   host     : 'host.docker.internal',
-  user     : 'user',
-  password : 'password',
-  database : 'database'
+  user     : 'root',
+  password : 'root',
+  database : 'MyDatabase'
 });
- 
+
+
 connection.connect(function(err) {
   if (err) {
     console.error('Error connecting: ' + err.stack);
@@ -33,8 +31,43 @@ connection.connect(function(err) {
 
   console.log('Connected as id ' + connection.threadId);
 });
+
+
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to bezkoder application." });
+}); 
+
+
+app.get("/data/:page_id", (req, res) => {
+  const pageId = req.params.page_id;
+  const query = "SELECT title, decription, path FROM MyDatabase.MyDatabase WHERE page_id = ?"; 
+  connection.query(query, [pageId], (err, results) => {
+    if (err) {
+      console.error('Error query: ' + err);
+      res.status(500).json({ error: 'Error getting data' });
+      return;
+    }
+
+    console.log('Результаты запроса:', results);
+
+    if (results.length > 0) {
+      const data = results[0];
+      res.status(200).json({data})
+    } else {
+      res.status(404).json({ error: 'No data' });
+    }
+  });
+});
+
+
+
+
+
+
+
  
-connection.end();
+
+ 
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -11,10 +11,10 @@ function App() {
     <BrowserRouter>
       <Menu />
       <Routes>
-        <Route path="/home" element={<><Home /></>} />
-        <Route path="/article-1" element={<><FirstArticle /></>} />
-        <Route path="/article-2" element={<><SecondArticle /></>} />
-        <Route path="/article-3" element={<><ThirdArticle /></>} />
+        <Route path="/home" element={<><Home /></>}  />
+        <Route path="/article/:page_id" element={<><FirstArticle /></>} />
+        <Route path="/article/:page_id" element={<><SecondArticle /></>} />
+        <Route path="/article" element={<><ThirdArticle /></>} />
         <Route path="*" element={<h1>404 Not Found</h1>} /> 
       </Routes>
     </BrowserRouter>

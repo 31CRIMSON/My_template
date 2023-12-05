@@ -1,16 +1,15 @@
 import React from "react";
-import '/$styles/Article.sass';
+import '$styles/Article.sass';
 import { useState, useEffect } from 'react';
-import axios  from "axios";
 import { useParams } from "react-router-dom";
+import axios  from "axios";
+import path from 'path';
 
-function FirstArticle() {
+function Article() {
+
     const { page_id } = useParams(); 
-    const [data, setData] = useState({
-      title: "",
-      decription: "",
-      path: "",
-    });
+
+    const [data, setData] = useState({});
   
     useEffect(() => {
       axios
@@ -22,9 +21,8 @@ function FirstArticle() {
         .catch((error) => {
           console.error("Error getting data: " + error);
         });
-    }, [page_id]);
-    
-    
+        console.log(path.join('src/images', String(data.path)))
+    }, [data]);
 
     return (
         <div className="article">
@@ -33,10 +31,10 @@ function FirstArticle() {
                 <div className="article__frame-paragraph">{data.decription}</div>
             </div>
             <div className="article__image-container">
-                <img src={data.path} className="article__image"></img>
+                <img src={path.join('/src/images', String(data.path))} className="article__image"></img>
             </div>
         </div>
     );
 }
 
-export default FirstArticle;
+export default Article;

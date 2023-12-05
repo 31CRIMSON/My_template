@@ -1,5 +1,4 @@
 import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 
@@ -14,11 +13,15 @@ export default defineConfig({
       usePolling: true
     }
   },
-
+  define: {
+    "process": process,
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '/$styles': fileURLToPath(new URL('/src/styles', import.meta.url))
-    }
+      '$styles': fileURLToPath(new URL('/src/styles', import.meta.url)),
+      '$images': fileURLToPath(new URL('/src/images', import.meta.url)),
+
+    },
   }
 })

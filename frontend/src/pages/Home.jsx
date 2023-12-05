@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '/$styles/Home.sass';
+import '$styles/Home.sass';
 
 
 
@@ -25,7 +25,7 @@ function Home() {
           <div className='image__desc'>
             <div className='image__text'>Dima is great</div>
             <button className='image__button'>
-            <Link to="/article-1" className="image_button-link">Read Article</Link>
+            <Link to="/article/1" className="image_button-link">Read Article</Link>
             </button>
           </div>
         </div>
@@ -34,7 +34,7 @@ function Home() {
           <div className='image__desc'>
             <div className='image__text'>Dima is awesome</div>
             <button className='image__button'>
-            <Link to="/article-2" className="image_button-link">Read Article</Link>
+            <Link to="/article/2" className="image_button-link">Read Article</Link>
             </button>
           </div>
         </div>

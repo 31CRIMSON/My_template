@@ -21,7 +21,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '$styles': fileURLToPath(new URL('/src/styles', import.meta.url)),
       '$images': fileURLToPath(new URL('/src/images', import.meta.url)),
-
+      '$context': fileURLToPath(new URL('/src/context', import.meta.url)),
+      '$components': fileURLToPath(new URL('/src/components', import.meta.url)),
     },
   }
 })

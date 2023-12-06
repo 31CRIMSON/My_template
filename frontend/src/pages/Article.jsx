@@ -1,40 +1,40 @@
 import React from "react";
-import '$styles/Article.sass';
-import { useState, useEffect } from 'react';
+import "$styles/Article.sass";
 import { useParams } from "react-router-dom";
-import axios  from "axios";
-import path from 'path';
+import path from "path";
+import { useData } from "../context/DataContext";
+import { useEffect } from "react";
 
 function Article() {
+  const { page_id } = useParams();
+  const { data, fetchData } = useData();
 
-    const { page_id } = useParams(); 
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
-    const [data, setData] = useState({});
-  
-    useEffect(() => {
-      axios
-        .get(`http://localhost:3000/data/${page_id}`) 
-        .then((response) => {
-          console.log(response.data);
-          setData(response.data.data);
-        })
-        .catch((error) => {
-          console.error("Error getting data: " + error);
-        });
-        console.log(path.join('src/images', String(data.path)))
-    }, [data]);
 
-    return (
-        <div className="article">
-            <div className="article__frame">
-                <div className="article__frame-heading">{data.title}</div>
-                <div className="article__frame-paragraph">{data.decription}</div>
-            </div>
-            <div className="article__image-container">
-                <img src={path.join('/src/images', String(data.path))} className="article__image"></img>
-            </div>
-        </div>
-    );
+  const articleData = data.find((item) => item.page_id === parseInt(page_id));
+
+  if (!articleData) {
+    return <div>Article not found</div>;
+  }
+
+  return (
+    <div className="article">
+      <div className="article__frame">
+        <div className="article__frame-heading">{articleData.title}</div>
+        <div className="article__frame-paragraph">{articleData.decription}</div>
+      </div>
+      <div className="article__image-container">
+        <img
+          src={path.join("/src/images", String(articleData.path))}
+          className="article__image"
+          alt={articleData.title}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default Article;
